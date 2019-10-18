@@ -1,0 +1,44 @@
+{
+	"name":        "pxn/phpshell",
+	"description": "Shell Utilities Library",
+	"type":        "library",
+	"homepage":    "https://poixson.com/",
+	"license":     "GPL-3.0",
+	"keywords": [
+		"framework", "utilities"
+	],
+	"support": {
+		"source": "https://git.poixson.com/summary/pxn!phpShell.git",
+		"issues": "https://git.poixson.com/tickets/pxn!phpShell.git",
+		"irc":    "irc://irc.esper.net/poixson"
+	},
+	"authors": [{
+		"name":  "lorenzop",
+		"role":  "Developer"
+	}],
+	"autoload": {
+		"psr-4": {
+			"pxn\\phpShell\\": "src/"
+		}
+	},
+	"autoload-dev": {
+		"psr-4": {
+			"pxn\\phpShell\\tests\\":    "tests/",
+			"pxn\\phpShell\\examples\\": "examples/"
+		}
+	},
+	"archive": {
+		"exclude": [
+			"tests/",
+			"examples/"
+		]
+	},
+	"require": {
+		"pxn/phputils": "dev-master",
+		"symfony/console": "v4.*",
+		"pxn/composerlocaldev": "1.*"
+	},
+	"require-dev": {
+		"phpunit/phpunit": "8.*"
+	}
+}
