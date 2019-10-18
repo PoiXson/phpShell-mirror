@@ -8,7 +8,7 @@
  */
 namespace pxn\phpShell;
 
-use pxn\phpUtils\System;
+use pxn\phpUtils\SystemUtils;
 use pxn\phpUtils\Defines;
 
 
@@ -44,7 +44,7 @@ abstract class ShellApp extends \pxn\phpUtils\app\App {
 
 
 	public static function ValidateShell() {
-		if (!System::isShell()) {
+		if (!SystemUtils::isShell()) {
 			$name = $this->getName();
 			\fail("This ShellApp class can only run as shell! $name",
 				Defines::EXIT_CODE_NOPERM);
