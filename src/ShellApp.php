@@ -10,7 +10,6 @@ namespace pxn\phpShell;
 
 use pxn\phpUtils\SystemUtils;
 use pxn\phpUtils\Defines;
-use pxn\phpUtils\Debug;
 
 
 abstract class ShellApp extends \pxn\phpUtils\app\App {
@@ -54,9 +53,6 @@ abstract class ShellApp extends \pxn\phpUtils\app\App {
 
 
 	public function run() {
-		if (Debug::isDebug()) {
-			echo " [Debug Mode] \n";
-		}
 		$this->console->run();
 		// exit
 		if ($this->isHelp()) {

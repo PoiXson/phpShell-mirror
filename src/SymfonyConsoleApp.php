@@ -8,6 +8,8 @@
  */
 namespace pxn\phpShell;
 
+use pxn\phpUtils\Debug;
+
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 
@@ -29,6 +31,10 @@ class SymfonyConsoleApp extends \Symfony\Component\Console\Application {
 
 	protected function configureIO(InputInterface $input, OutputInterface $output) {
 		parent::configureIO($input, $output);
+		// no command
+		if (!$this->getCommandName($input)) {
+			$this->isHelp = TRUE;
+		} else
 		// --help
 		if ($input->hasParameterOption(['--help', '-h'], true)) {
 			$this->isHelp = TRUE;
@@ -36,7 +42,35 @@ class SymfonyConsoleApp extends \Symfony\Component\Console\Application {
 		// help command
 		if ($this->getCommandName($input) == 'help') {
 			$this->isHelp = TRUE;
+		// wantHelps
+		} else {
+			$reflect = new \ReflectionClass('Symfony\\Component\\Console\\Application');
+			$prop = $reflect->getProperty('wantHelps');
+			$prop->setAccessible(TRUE);
+			if ($prop->getValue($this)) {
+				$this->isHelp = TRUE;
+			}
 		}
+	}
+
+
+
+	public function doRun(InputInterface $input, OutputInterface $output) {
+		{
+			$newline = FALSE;
+			if (Debug::isDebug()) {
+				echo " [Debug Mode] \n";
+				$newline = TRUE;
+			}
+//			if ($this->app->isHelp()) {
+//				echo " [Help] \n";
+//				$newline = TRUE;
+//			}
+			if ($newline) {
+				echo "\n";
+			}
+		}
+		parent::doRun($input, $output);
 	}
 
 
