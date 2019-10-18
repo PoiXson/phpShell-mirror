@@ -36,6 +36,7 @@
 	"require": {
 		"pxn/phputils": "dev-master",
 		"symfony/console": "v4.*",
+		"symfony/event-dispatcher": "v4.*",
 		"pxn/composerlocaldev": "1.*"
 	},
 	"require-dev": {
