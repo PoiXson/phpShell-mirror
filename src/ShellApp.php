@@ -53,8 +53,14 @@ abstract class ShellApp extends \pxn\phpUtils\app\App {
 
 
 	public function run() {
-		$this->console->run();
-		// exit
+		$this->exitCode = $this->console->run();
+		$this->doExit();
+	}
+	public function doExit() {
+		// is help
+		if ($this->exitCode == Defines::EXIT_CODE_HELP) {
+			$this->isHelp = TRUE;
+		}
 		if ($this->isHelp()) {
 			exit(Defines::EXIT_CODE_HELP);
 		}

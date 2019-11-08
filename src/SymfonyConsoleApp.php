@@ -70,7 +70,7 @@ class SymfonyConsoleApp extends \Symfony\Component\Console\Application {
 				echo "\n";
 			}
 		}
-		parent::doRun($input, $output);
+		return parent::doRun($input, $output);
 	}
 
 
