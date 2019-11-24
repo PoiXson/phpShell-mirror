@@ -21,7 +21,7 @@ class SymfonyConsoleApp extends \Symfony\Component\Console\Application {
 
 
 
-	public function __construct(ShellApp $app, &$isHelp) {
+	public function __construct(ShellApp $app, bool &$isHelp) {
 		$this->app = $app;
 		$this->isHelp = &$isHelp;
 		parent::__construct($app->getName(), $app->getVersion());
@@ -29,7 +29,7 @@ class SymfonyConsoleApp extends \Symfony\Component\Console\Application {
 
 
 
-	protected function configureIO(InputInterface $input, OutputInterface $output) {
+	protected function configureIO(InputInterface $input, OutputInterface $output): void {
 		parent::configureIO($input, $output);
 		// no command
 		if (!$this->getCommandName($input)) {
@@ -55,7 +55,7 @@ class SymfonyConsoleApp extends \Symfony\Component\Console\Application {
 
 
 
-	public function doRun(InputInterface $input, OutputInterface $output) {
+	public function doRun(InputInterface $input, OutputInterface $output): bool {
 		{
 			$newline = FALSE;
 			if (Debug::isDebug()) {

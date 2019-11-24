@@ -29,7 +29,7 @@ abstract class ShellApp extends \pxn\phpUtils\app\App {
 		parent::__construct();
 		$this->initSymfonyConsole();
 	}
-	protected function initSymfonyConsole() {
+	protected function initSymfonyConsole(): void {
 		$this->console = new SymfonyConsoleApp($this, $this->isHelp);
 		$this->console->setAutoExit(FALSE);
 		$this->consoleDispatch = new \Symfony\Component\EventDispatcher\EventDispatcher();
@@ -52,11 +52,11 @@ abstract class ShellApp extends \pxn\phpUtils\app\App {
 
 
 
-	public function run() {
+	public function run(): void {
 		$this->exitCode = $this->console->run();
 		$this->doExit();
 	}
-	public function doExit() {
+	public function doExit(): void {
 		// is help
 		if ($this->exitCode == Defines::EXIT_CODE_HELP) {
 			$this->isHelp = TRUE;
@@ -72,7 +72,7 @@ abstract class ShellApp extends \pxn\phpUtils\app\App {
 
 
 
-	public function consoleListener(\Symfony\Component\Console\Event\ConsoleCommandEvent $event) {
+	public function consoleListener(\Symfony\Component\Console\Event\ConsoleCommandEvent $event): void {
 		$input = $event->getInput();
 		// --debug
 		if ($input->hasParameterOption('--debug', '-d')) {
@@ -84,7 +84,7 @@ abstract class ShellApp extends \pxn\phpUtils\app\App {
 			);
 		}
 	}
-	public function addConsoleListener(callable $func) {
+	public function addConsoleListener(callable $func): void {
 		if ($this->consoleDispatch == NULL) {
 			throw new \NullPointerException('Symfony console not initialized');
 		}
@@ -104,13 +104,13 @@ abstract class ShellApp extends \pxn\phpUtils\app\App {
 
 
 
-	public function isHelp() {
+	public function isHelp(): bool {
 		return $this->isHelp;
 	}
 
 
 
-	public static function ValidateShell() {
+	public static function ValidateShell(): void {
 		if (!SystemUtils::isShell()) {
 			$name = $this->getName();
 			\fail("This ShellApp class can only run as shell! $name",
