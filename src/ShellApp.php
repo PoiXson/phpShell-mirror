@@ -41,8 +41,7 @@ abstract class ShellApp extends \pxn\phpUtils\app\App {
 				new \Symfony\Component\Console\Input\InputOption(
 					'debug', 'd',
 					\Symfony\Component\Console\Input\InputOption::VALUE_OPTIONAL,
-					'Enable or disable debug mode.',
-					TRUE
+					'Enable or disable debug mode.'
 				)
 			]);
 			$this->console->setDispatcher($this->consoleDispatch);
@@ -105,7 +104,9 @@ abstract class ShellApp extends \pxn\phpUtils\app\App {
 
 
 	public function isHelp(): bool {
-		return $this->isHelp;
+		if ($this->isHelp === NULL)
+			return FALSE;
+		return ($this->isHelp != FALSE);
 	}
 
 
@@ -113,8 +114,7 @@ abstract class ShellApp extends \pxn\phpUtils\app\App {
 	public static function ValidateShell(): void {
 		if (!SystemUtils::isShell()) {
 			$name = $this->getName();
-			\fail("This ShellApp class can only run as shell! $name",
-				Defines::EXIT_CODE_NOPERM);
+			throw new \RuntimeException("This script can only run as shell! $name");
 		}
 	}
 

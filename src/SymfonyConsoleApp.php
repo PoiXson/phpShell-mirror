@@ -21,7 +21,7 @@ class SymfonyConsoleApp extends \Symfony\Component\Console\Application {
 
 
 
-	public function __construct(ShellApp $app, bool &$isHelp) {
+	public function __construct(ShellApp $app, ?bool &$isHelp) {
 		$this->app = $app;
 		$this->isHelp = &$isHelp;
 		parent::__construct($app->getName(), $app->getVersion());
