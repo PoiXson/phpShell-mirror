@@ -1,0 +1,8 @@
+phpShell - Shell Utilities Library
+
+
+2019-12-31 phpShell 0.2.0
+=========================
+* Initial release
+* to make available to composer as dependency
+* (Not fully functional)
