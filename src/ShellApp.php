@@ -1,7 +1,7 @@
 <?php
 /*
  * PoiXson phpShell - Shell Utilities Library
- * @copyright 2019
+ * @copyright 2019-2020
  * @license GPL-3
  * @author lorenzo at poixson.com
  * @link https://poixson.com/
