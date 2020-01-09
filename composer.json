@@ -35,8 +35,8 @@
 	},
 	"require": {
 		"pxn/phputils": "0.2.*",
-		"symfony/console": "v4.*",
-		"symfony/event-dispatcher": "v4.*",
+		"symfony/console": "v5.*",
+		"symfony/event-dispatcher": "v5.*",
 		"pxn/composerlocaldev": "1.*"
 	},
 	"require-dev": {
