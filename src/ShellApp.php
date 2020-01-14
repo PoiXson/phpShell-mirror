@@ -25,7 +25,7 @@ abstract class ShellApp extends \pxn\phpUtils\app\App {
 
 
 	public function __construct() {
-		self::ValidateShell();
+		self::AssertShell();
 		parent::__construct();
 		$this->initSymfonyConsole();
 	}
@@ -111,7 +111,7 @@ abstract class ShellApp extends \pxn\phpUtils\app\App {
 
 
 
-	public static function ValidateShell(): void {
+	public static function AssertShell(): void {
 		if (!SystemUtils::isShell()) {
 			$name = $this->getName();
 			throw new \RuntimeException("This script can only run as shell! $name");
