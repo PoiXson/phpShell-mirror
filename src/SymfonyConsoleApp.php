@@ -1,7 +1,7 @@
-<?php
+<?php declare(strict_types = 1);
 /*
  * PoiXson phpShell - Shell Utilities Library
- * @copyright 2019-2020
+ * @copyright 2019-2021
  * @license GPL-3
  * @author lorenzo at poixson.com
  * @link https://poixson.com/
