@@ -3,14 +3,14 @@
 	"description": "Shell Utilities Library",
 	"type":        "library",
 	"homepage":    "https://poixson.com/",
-	"license":     "GPL-3.0",
+	"license":     "AGPL-3.0",
 	"keywords": [
 		"framework", "utilities"
 	],
 	"support": {
-		"source": "https://git.poixson.com/summary/pxn!phpShell.git",
-		"issues": "https://git.poixson.com/tickets/pxn!phpShell.git",
-		"irc":    "irc://irc.esper.net/poixson"
+		"source":  "https://git.poixson.com/summary/pxn!phpShell.git",
+		"issues":  "https://git.poixson.com/tickets/pxn!phpShell.git",
+		"discord": "https://discord.gg/jHgP2a3kDx"
 	},
 	"authors": [{
 		"name": "lorenzop",
@@ -34,12 +34,18 @@
 		]
 	},
 	"require": {
-		"pxn/phputils": "0.2.*",
-		"symfony/console": "v5.*",
-		"symfony/event-dispatcher": "v5.*",
-		"pxn/composerlocaldev": "1.*"
+		"pxn/phputils": "*",
+		"symfony/console": "*",
+		"symfony/event-dispatcher": "*",
+		"pxn/composerlocaldev": "*"
 	},
 	"require-dev": {
+		"nunomaduro/collision": "*",
 		"phpunit/phpunit": "*"
+	},
+	"config": {
+		"allow-plugins": {
+			"pxn/composerlocaldev": true
+		}
 	}
 }
