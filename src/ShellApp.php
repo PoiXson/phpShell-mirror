@@ -8,8 +8,7 @@
  */
 namespace pxn\phpShell;
 
-use pxn\phpUtils\SystemUtils;
-use pxn\phpUtils\Defines;
+use \pxn\phpUtils\utils\SystemUtils;
 
 
 abstract class ShellApp extends \pxn\phpUtils\app\xApp {
