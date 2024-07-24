@@ -35,8 +35,6 @@
 	},
 	"require": {
 		"pxn/phputils": "*",
-		"symfony/console": "*",
-		"symfony/event-dispatcher": "*",
 		"pxn/composerlocaldev": "*"
 	},
 	"require-dev": {
