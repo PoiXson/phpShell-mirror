@@ -1,7 +1,7 @@
 <?php declare(strict_types = 1);
 /*
  * PoiXson phpShell - Shell Utilities Library
- * @copyright 2019-2021
+ * @copyright 2019-2024
  * @license GPL-3
  * @author lorenzo at poixson.com
  * @link https://poixson.com/
@@ -12,110 +12,50 @@ use pxn\phpUtils\SystemUtils;
 use pxn\phpUtils\Defines;
 
 
-abstract class ShellApp extends \pxn\phpUtils\app\App {
+abstract class ShellApp extends \pxn\phpUtils\app\xApp {
 
-	// symfony console
-	protected $console = NULL;
-	protected $consoleDispatch = NULL;
+	protected ?bool $is_help = null;
 
-	protected $isHelp = NULL;
-
-	protected $exitCode = NULL;
+	protected ?int $exit_code = null;
 
 
 
 	public function __construct() {
-		self::AssertShell();
+		$this->assert_is_shell();
 		parent::__construct();
-		$this->initSymfonyConsole();
-	}
-	protected function initSymfonyConsole(): void {
-		$this->console = new SymfonyConsoleApp($this, $this->isHelp);
-		$this->console->setAutoExit(FALSE);
-		$this->consoleDispatch = new \Symfony\Component\EventDispatcher\EventDispatcher();
-		// default flags
-		{
-			$def = $this->console->getDefinition();
-			// --debug
-			$def->addOptions([
-				new \Symfony\Component\Console\Input\InputOption(
-					'debug', 'd',
-					\Symfony\Component\Console\Input\InputOption::VALUE_OPTIONAL,
-					'Enable or disable debug mode.'
-				)
-			]);
-			$this->console->setDispatcher($this->consoleDispatch);
-			$this->addConsoleListener([ $this, 'consoleListener' ]);
-		}
 	}
 
 
 
 	public function run(): void {
-		$this->exitCode = $this->console->run();
+		if ($this->notHelp())
+			$this->exit_code = $this->console->run();
 		$this->doExit();
 	}
 	public function doExit(): void {
-		// is help
-		if ($this->exitCode == Defines::EXIT_CODE_HELP) {
-			$this->isHelp = TRUE;
-		}
-		if ($this->isHelp()) {
-			exit(Defines::EXIT_CODE_HELP);
-		}
-		if ($this->exitCode === NULL) {
-			exit(Defines::EXIT_CODE_OK);
-		}
-		exit( (int)$this->exitCode );
+		if ($this->isHelp())
+			$this->display_help();
+		exit( (int)$this->exit_code );
 	}
 
 
 
-	public function consoleListener(\Symfony\Component\Console\Event\ConsoleCommandEvent $event): void {
-		$input = $event->getInput();
-		// --debug
-		if ($input->hasParameterOption('--debug', '-d')) {
-			$debug = $input->getParameterOption(['--debug', '-d'], FALSE);
-			$desc = 'by cli flag';
-			Debug::setDebug(
-				($debug === NULL ? TRUE : GeneralUtils::castBoolean($debug)),
-				$desc
-			);
-		}
+	public function display_help(): void {
+//TODO
 	}
-	public function addConsoleListener(callable $func): void {
-		if ($this->consoleDispatch == NULL) {
-			throw new \NullPointerException('Symfony console not initialized');
-		}
-		$this->consoleDispatch->addListener(
-			\Symfony\Component\Console\ConsoleEvents::COMMAND,
-			[ $this, 'consoleListener' ]
-		);
-	}
-
-
-
-/*
-	public function printFail($msg) {
-		echo "\n *** FATAL: $msg *** \n\n";
-	}
-*/
-
-
 
 	public function isHelp(): bool {
-		if ($this->isHelp === NULL)
-			return FALSE;
-		return ($this->isHelp != FALSE);
+		return ($this->is_help===null ? false : $this->is_help);
+	}
+	public function notHelp(): bool {
+		return ($this->is_help===null ? true : !$this->is_help);
 	}
 
 
 
-	public static function AssertShell(): void {
-		if (!SystemUtils::isShell()) {
-			$name = $this->getName();
-			throw new \RuntimeException("This script can only run as shell! $name");
-		}
+	public function assert_is_shell(): void {
+		if (!SystemUtils::IsShell())
+			throw new \RuntimeException('This script can only run as shell');
 	}
 
 
