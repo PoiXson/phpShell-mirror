@@ -1,6 +1,12 @@
 phpShell - Shell Utilities Library
 
 
+2024-07-24 - 0.4.23
+==================
+* cleanup for rewrite (unfinished)
+* updated composer dependencies
+
+
 2020-01-09 - 0.2.1
 ==================
 * updated composer dependencies
