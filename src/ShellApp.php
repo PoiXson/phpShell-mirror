@@ -13,8 +13,9 @@ use \pxn\phpUtils\utils\SystemUtils;
 
 abstract class ShellApp extends \pxn\phpUtils\app\xApp {
 
-	protected ?bool $is_help = null;
+	protected array $commands = [];
 
+	protected ?bool $is_help  = null;
 	protected ?int $exit_code = null;
 
 
@@ -27,14 +28,35 @@ abstract class ShellApp extends \pxn\phpUtils\app\xApp {
 
 
 	public function run(): void {
-		if ($this->notHelp())
-			$this->exit_code = $this->console->run();
+		// load commands and flags
+		$this->load_commands();
+		$count_commands = count($this->commands);
+		if ($count_commands == 0)
+			throw new \RuntimeException('No shell commands loaded');
+		if ($count_commands == 1) {
+			$cmd = \reset($this->commands);
+			$cmd->run();
+		} else {
+
+
+
+		}
+//TODO
+//		if ($this->isHelp())
 		$this->doExit();
 	}
 	public function doExit(): void {
 		if ($this->isHelp())
 			$this->display_help();
 		exit( (int)$this->exit_code );
+	}
+
+
+
+	protected abstract function load_commands(): void;
+
+	public function addCommand(Command $cmd): void {
+		$this->commands[] = $cmd;
 	}
 
 
