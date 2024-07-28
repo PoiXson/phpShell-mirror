@@ -1,20 +1,27 @@
 phpShell - Shell Utilities Library
 
 
+2024-07-28 - 0.4.25
+==================
+* added Command abstract class
+* --help is unfinished
+* updated dependencies
+
+
 2024-07-24 - 0.4.24
 ==================
-* updated composer dependencies
+* updated dependencies
 
 
 2024-07-24 - 0.4.23
 ==================
 * cleanup for rewrite (unfinished)
-* updated composer dependencies
+* updated dependencies
 
 
 2020-01-09 - 0.2.1
 ==================
-* updated composer dependencies
+* updated dependencies
 
 
 2019-12-31 - 0.2.0
